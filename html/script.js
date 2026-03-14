@@ -1,7 +1,8 @@
 window.addEventListener('message', function (event) {
   var data = event.data
 
-  if (data.hasOwnProperty('type')) {
+  // Only show progress if type, value, AND max are all present (not chat hide messages)
+  if (data.hasOwnProperty('type') && data.hasOwnProperty('value') && data.hasOwnProperty('max')) {
     var type = data.type
     var drawable = data.value
     var max = data.max

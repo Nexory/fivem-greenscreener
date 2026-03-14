@@ -159,3 +159,7 @@ dist
 # .pnp.*
 
 # End of https://www.toptal.com/developers/gitignore/api/node,yarn
+images/
+clothing_items.json
+.yarn.installed
+convert_lua_to_json.awk

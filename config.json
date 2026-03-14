@@ -1,9 +1,17 @@
 {
   "debug": false,
-  "includeTextures": false,
+  "imageSize": 150,
+  "//__comment__//imageSize": "Output image size in pixels (1:1 square, e.g. 150 = 150x150)",
+  "chromaSensitivity": "soft",
+  "//__comment__//chroma": "Greenscreen removal: 'soft' (preserves green/yellow items), 'medium', 'hard' (aggressive removal)",
+  "includeTextures": true,
   "//__comment__//textures": "The image generation will take much longer and you will have much more images!",
   "overwriteExistingImages": true,
-	"//__comment__//overwrite": "If false, existing image files will be skipped instead of overwritten",
+  "//__comment__//overwrite": "If false, existing image files will be skipped (no screenshot taken) instead of overwritten",
+  "useDatabaseItems": false,
+  "//__comment__//database": "If true, only screenshots items from clothing_items.json (extracted from database)",
+  "categories": [],
+  "//__comment__//categories": "Filter by categories. Empty [] = all. Options: clothing_mask, clothing_top, clothing_torso, clothing_undershirt, clothing_pants, clothing_shoes, clothing_accessory, clothing_hair, clothing_hat, clothing_glasses, clothing_ears, clothing_watch, clothing_bracelet, clothing_bag, clothing_vest",
   "useQBVehicles": false,
   "//__comment__//qbvehicles": "If you want to use the QB Vehicles in the vehicles.lua file, set this to true. QBCore has to be installed and started before this script!",
   "coreResourceName": "qb-core",
@@ -38,24 +46,24 @@
   "cameraSettings": {
     "CLOTHING": {
       "1": {
-        "fov": 30,
+        "fov": 40,
         "rotation": {
           "x": 0,
           "y": 0,
-          "z": 120
+          "z": 255
         },
         "zPos": 0.65,
-        "name": "Masks"
+        "name": "clothing_mask"
       },
       "3": {
-        "fov": 55,
+        "fov": 35,
         "rotation": {
           "x": 0,
           "y": 0,
-          "z": 155
+          "z": 140
         },
-        "zPos": 0.3,
-        "name": "Torsos"
+        "zPos": -0.05,
+        "name": "clothing_torso"
       },
       "4": {
         "fov": 60,
@@ -64,18 +72,18 @@
           "y": 0,
           "z": 155
         },
-        "zPos": -0.46,
-        "name": "Legs"
+        "zPos": -0.48,
+        "name": "clothing_pants"
       },
       "5": {
         "fov": 40,
         "rotation": {
           "x": 0,
           "y": 0,
-          "z": -25
+          "z": 335
         },
-        "zPos": 0.3,
-        "name": "Bags"
+        "zPos": 0.15,
+        "name": "clothing_bag"
       },
       "6": {
         "fov": 40,
@@ -85,7 +93,7 @@
           "z": 120
         },
         "zPos": -0.85,
-        "name": "Shoes"
+        "name": "clothing_shoes"
       },
       "7": {
         "fov": 45,
@@ -95,17 +103,7 @@
           "z": 155
         },
         "zPos": 0.3,
-        "name": "Accessories"
-      },
-      "8": {
-        "fov": 45,
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 155
-        },
-        "zPos": 0.3,
-        "name": "Undershirts"
+        "name": "clothing_accessory"
       },
       "9": {
         "fov": 45,
@@ -115,17 +113,17 @@
           "z": 155
         },
         "zPos": 0.3,
-        "name": "Body Armors"
+        "name": "clothing_vest"
       },
       "11": {
-        "fov": 55,
+        "fov": 70,
         "rotation": {
           "x": 0,
           "y": 0,
           "z": 155
         },
-        "zPos": 0.26,
-        "name": "Tops"
+        "zPos": 0.1,
+        "name": "clothing_top"
       }
     },
     "PROPS": {
@@ -134,40 +132,40 @@
         "rotation": {
           "x": 0,
           "y": 0,
-          "z": 120
+          "z": 110
         },
         "zPos": 0.75,
-        "name": "Hats"
+        "name": "clothing_hat"
       },
       "1": {
         "fov": 20,
         "rotation": {
           "x": 0,
           "y": 0,
-          "z": 120
+          "z": 110
         },
         "zPos": 0.7,
-        "name": "Glasses"
+        "name": "clothing_glasses"
       },
       "2": {
-        "fov": 20,
+        "fov": 7,
         "rotation": {
           "x": 0,
           "y": 0,
-          "z": 237.5
+          "z": 250
         },
-        "zPos": 0.675,
-        "name": "Ears"
+        "zPos": 0.63,
+        "name": "clothing_ears"
       },
       "6": {
         "fov": 20,
         "rotation": {
           "x": 0,
           "y": 0,
-          "z": 59
+          "z": 45
         },
-        "zPos": 0.03,
-        "name": "Watches"
+        "zPos": -0.035,
+        "name": "clothing_watch"
       },
       "7": {
         "fov": 20,
@@ -177,17 +175,22 @@
           "z": 250
         },
         "zPos": 0.03,
-        "name": "Bracelets"
+        "name": "clothing_bracelet"
       }
     }
   },
-  "greenScreenPosition": {
-    "x": -1289.02,
-    "y": -3409.83,
-    "z": 20.91
+  "greenScreenObjectPosition": {
+    "x": -1278,
+    "y": -3398,
+    "z": 21.5
   },
-  "greenScreenRotation": {
-    "x": 0,
+  "pedPosition": {
+    "x": -1278,
+    "y": -3408,
+    "z": 24
+  },
+  "pedRotation": {
+    "x": -45,
     "y": 0,
     "z": 330
   },
@@ -199,11 +202,11 @@
   "greenScreenVehicleRotation": {
     "x": 0,
     "y": 0,
-    "z": 254.03
+    "z": 74.03
   },
   "greenScreenHiddenSpot": {
-    "x": -1224.22,
-    "y": -3349.63,
-    "z": 13.96
+    "x": -1300,
+    "y": -3400,
+    "z": 255
   }
 }
